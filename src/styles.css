@@ -1,0 +1,111 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    background-color: rgb(238, 237, 237);
+}
+/*
+yellow color: #d06805;
+plus,minus color: #202020;
+numbers: #161616;
+textarea: #000000;
+*/
+.calculator{
+    width: 330px;
+    height: auto;
+    margin: 10% auto;
+    border: 2px solid white;
+    box-shadow: -5px -5px 5px 2px #999999;
+}
+.arrow{
+    background-color: white;
+}
+.calcbox1{
+    display: grid;
+    background-color: #161616;
+    height: 100%;
+    grid-template-columns: repeat(3, 5.2rem);
+    grid-template-rows: repeat(4, 5rem);
+    flex: 2;
+}
+.calcbox1 > button{
+    background-color: #161616;
+    color: white;
+    border: none;
+}
+.calcbox1 > button:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+}
+.calcbox2{
+    display: grid;
+    background-color: #202020;
+    height: 100%;
+    grid-template-columns: repeat(1, 4rem);
+    grid-template-rows: repeat(5, 4rem);
+}
+.calcbox2 > button{
+    background-color: #202020;
+    color: #d06805;
+    border: none;
+}
+.calcbox2 > button:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #d06805;
+}
+.box3{
+    display: none;
+}
+
+.calcbox3{
+    background-color: #d06805;
+    display: grid;
+    height: 90%;
+    grid-template-columns: repeat(3, 4rem);
+    grid-template-rows: repeat(4, 4rem);
+}
+.calcbox3 > button{
+    background-color: #d06805;
+    color: white;
+    border: none;
+}
+.calcbox3 > button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+}
+.calcbuttons{
+    display: flex;
+    cursor: pointer;
+   
+}
+.output{
+    background-color: black;
+    min-height: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: .75rem;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.btnstyle{
+    font-weight: 600;
+    font-size: larger;
+}
+.btnstyle1{
+    font-weight: 400;
+    font-size: large;
+}
+.previous{
+    color: white;
+    font-size: 1rem;
+}
+.current{
+    color: white;
+    font-size: 2rem;
+}
