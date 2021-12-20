@@ -82,6 +82,9 @@ textarea: #000000;
     cursor: pointer;
    
 }
+.btn{
+    margin-right: 87%;
+}
 .output{
     background-color: black;
     min-height: 7rem;
