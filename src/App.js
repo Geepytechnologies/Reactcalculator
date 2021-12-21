@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import "./styles.css"
-import $ from 'jquery'
+//import $ from 'jquery'
 import DigitButton from './DigitButton'
 import OperationButton from './OperationButton'
 import DeleteButton from './DeleteButton'
@@ -22,7 +22,9 @@ export const ACTIONS = {
   ATAN: "atan",
   SQRT: "sqrt",
   SQUARE: "squared",
-  CUBE: "cubed"
+  SQUARECUBE: "squarecube",
+  SQUAREFOUR: "squarefour",
+  CUBEROOT: "cuberoot"
 }
 
 function reducer(state, {type, payload}){
@@ -185,10 +187,26 @@ function reducer(state, {type, payload}){
                 operation: null,
                 previous: null
               }
-             case ACTIONS.CUBE:
+             case ACTIONS.SQUARECUBE:
               return {
                 ...state,
                 current: Cube(state.current),
+                overwrite: true,
+                operation: null,
+                previous: null
+              }
+             case ACTIONS.SQUAREFOUR:
+              return {
+                ...state,
+                current: Cubefour(state.current),
+                overwrite: true,
+                operation: null,
+                previous: null
+              }
+             case ACTIONS.CUBEROOT:
+              return {
+                ...state,
+                current: Cuberoot(state.current),
                 overwrite: true,
                 operation: null,
                 previous: null
@@ -246,6 +264,11 @@ function Sqrt(current){
   const calcsqrt = Math.sqrt(Sqrtnumber)
   return calcsqrt
 }
+function Cuberoot(current){
+  const cbrtnumber = parseFloat(current)
+  const calccbrt = Math.cbrt(cbrtnumber)
+  return calccbrt
+}
 function Square(current){
   const Squarenumber = parseFloat(current)
   const calcsquare = Squarenumber * Squarenumber
@@ -255,6 +278,11 @@ function Cube(current){
   const Cubenumber = parseFloat(current)
   const calcube = Cubenumber * Cubenumber * Cubenumber
   return calcube
+}
+function Cubefour(current){
+  const Cubefournumber = parseFloat(current)
+  const calcubefour = Cubefournumber * Cubefournumber * Cubefournumber * Cubefournumber
+  return calcubefour
 }
 
 
@@ -271,10 +299,10 @@ function evaluate({previous, current, operation}){
       case "-":
        computation = prev - curr
        break
-      case "/":
+      case "÷":
         computation = prev / curr
        break
-       case "*":
+       case "×":
         computation = prev * curr
         break
         default:
@@ -283,59 +311,59 @@ function evaluate({previous, current, operation}){
 
 }
 
-$(function(){
-  $(".btn").click(function(){
-    $(".box3").fadeToggle(500);
-  })
-})
+
 
 function App() {
   const [{previous, current, operation}, dispatch] = useReducer(reducer, {})
   return (
      <div className="calculator">
        <div className="output">
-         <button className="btn">Func</button>
          <div className="previous">{previous} {operation}</div>
          <div className="current">{current}</div>
        </div>
-       <div className="calcbuttons">       
-          <div className="calcbox1">
-              <DigitButton digit="7" dispatch={dispatch} />
-              <DigitButton digit="8" dispatch={dispatch} />
-              <DigitButton digit="9" dispatch={dispatch} />
-              <DigitButton digit="4" dispatch={dispatch} />
-              <DigitButton digit="5" dispatch={dispatch} />
-              <DigitButton digit="6" dispatch={dispatch} />
-              <DigitButton digit="1" dispatch={dispatch} />
-              <DigitButton digit="2" dispatch={dispatch} />
-              <DigitButton digit="3" dispatch={dispatch} />
-              <DigitButton digit="." dispatch={dispatch} />
-              <DigitButton digit="0" dispatch={dispatch} />
-              <button className="btnstyle"  onClick={() => dispatch({type: ACTIONS.EVALUATE})}>=</button>
-          </div>
-          <div className="calcbox2">
-            <DeleteButton operation="DEL" dispatch={dispatch} />
-            <OperationButton operation="/" dispatch={dispatch} />
-            <OperationButton operation="*" dispatch={dispatch} />
-            <OperationButton operation="-" dispatch={dispatch} />
-            <OperationButton operation="+" dispatch={dispatch} />
-         </div>
-         <div className ="box3">
+       <div className="calcbuttons">
+         <div className ="arithmetic">
             <div className="calcbox3" id="calcbox">
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.CLEAR})}>AC</button>
+              <button className="btnstyle" onClick={() => dispatch({type: ACTIONS.CLEAR})}>AC</button>
+              <DeleteButton operation="DEL" dispatch={dispatch} />
               <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SIN})}>sin</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.COS})}>Cos</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.TAN})}>Tan</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SQRT})}>Sqrt</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.COS})}>cos</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.TAN})}>tan</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SQRT})}>&#8730;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.CUBEROOT})}>&#8731;</button>
               <PercentageButton operation="%" dispatch={dispatch} />
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SQUARE})}>x^2</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.CUBE})}>x^3</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.ASIN})}>Sin1</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.ACOS})}>Cos1</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.ATAN})}>Tan1</button>
-              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.PI})}>Pi</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SQUARE})}>x&#178;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SQUARECUBE})}>x&#179;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.SQUAREFOUR})}>x&#8308;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.ASIN})}>sin&#8315;&#185;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.ACOS})}>cos&#8315;&#185;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.ATAN})}>tan&#8315;&#185;</button>
+              <button className="btnstyle1" onClick={() => dispatch({type: ACTIONS.PI})}>&#x3C0;</button>
             </div>
          </div>
+         <div className="numbers">
+              <div className="calcbox1">
+                    <DigitButton digit="7" dispatch={dispatch} />
+                    <DigitButton digit="8" dispatch={dispatch} />
+                    <DigitButton digit="9" dispatch={dispatch} />
+                    <DigitButton digit="4" dispatch={dispatch} />
+                    <DigitButton digit="5" dispatch={dispatch} />
+                    <DigitButton digit="6" dispatch={dispatch} />
+                    <DigitButton digit="1" dispatch={dispatch} />
+                    <DigitButton digit="2" dispatch={dispatch} />
+                    <DigitButton digit="3" dispatch={dispatch} />
+                    <DigitButton digit="." dispatch={dispatch} />
+                    <DigitButton digit="0" dispatch={dispatch} />
+                    <button className="btnstyle"  onClick={() => dispatch({type: ACTIONS.EVALUATE})}>=</button>
+                </div>
+                <div className="calcbox2">
+                  <OperationButton operation="&#247;" dispatch={dispatch} />
+                  <OperationButton operation="&#215;" dispatch={dispatch} />
+                  <OperationButton operation="-" dispatch={dispatch} />
+                  <OperationButton operation="+" dispatch={dispatch} />
+              </div>
+         </div>     
+          
        </div>
      </div>
   )}
