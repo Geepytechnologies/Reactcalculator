@@ -11,6 +11,12 @@ plus,minus color: #202020;
 numbers: #161616;
 textarea: #000000;
 */
+button:focus{
+    outline: none;
+}
+button{
+    outline: none;
+}
 .calculator{
     width: 330px;
     height: auto;
@@ -58,15 +64,17 @@ textarea: #000000;
 }
 .arithmetic{
     display: block;
-    height: 31vh;
+    height: 25vh;
 }
 .numbers{
     display: flex;
+    border-top: 1px solid white
 }
 
 .calcbox3{
     background-color: #d06805;
     display: grid;
+    padding: 5px 0px 2px 0px;
     height: 100%;
     grid-template-columns: repeat(5, 4rem);
     grid-template-rows: repeat(3, 3rem);
@@ -80,6 +88,7 @@ textarea: #000000;
     border: 2px solid white;
     cursor: pointer;
     text-align: center;
+    box-shadow: -2px -2px 3px 1px hsl(29, 85%, 27%);
 }
 .calcbox3 > button:hover{
     transform: scale(1.1,1.1);
@@ -101,6 +110,7 @@ textarea: #000000;
     padding: .75rem;
     word-wrap: break-word;
     word-break: break-all;
+    border-bottom: 1px solid white;
 }
 .btnstyle{
     font-weight: 600;
